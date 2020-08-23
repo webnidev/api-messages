@@ -15,7 +15,7 @@ module.exports = {
                return res.send("Preencha os campos")
              }
         }
-       Message.create(req.body, function(message){
+       Message.create(req.body, res, function(message){
            return res.send(message)
        })
     },
