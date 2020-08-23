@@ -1,0 +1,8 @@
+API para cadastro de mensagens por categoria de clientes
+Requisitos:
+-A API deve permitir, o cadastro de mensagens com uma descrição e uma url.
+-A API deve permitir, o cadastro de notificações com uma descrição e uma url.
+-A API deve permitir, o cadstro de categorias.
+-A API deve permitir, a exibição de todas as categorias com seus respectivos ids.
+-A API deve permitir, a exibição de todas as mensagens, assim como de mensagens inidividuais.
+A API deve permitir, a exibição de das ultimas notificações
