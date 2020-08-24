@@ -18,9 +18,13 @@ module.exports = {
 
     },
     create(data,res, callback){
-        const query = `INSERT INTO messages (message, url, created_at) VALUES($1, $2, $3) RETURNING message_id`
-        const values = [data.message,data.url,data.created_at]
+        const query = `INSERT INTO messages (message, url, category_id, created_at) VALUES($1, $2, $3, $4) RETURNING message_id`
+        if(!data.category_id){
+            data.category_id = '1'
+        }
+        const values = [data.message, data.url, data.category_id, data.created_at]
         db.query(query, values, function(err, results){
+            console.log(err)
             if (err) return res.send(err)
             callback(results.rows[0])
         })
