@@ -1,4 +1,11 @@
-<?php require_once('header.php') ?>
+<?php 
+require_once('header.php');
+require_once('curl/request.php');
+$rec = new Request("http://localhost:5000/category");
+$categories = $rec->exec();
+$re = new Request("http://localhost:5000/notification");
+$notifications = $re->exec();
+?>
 
 
 
@@ -27,7 +34,7 @@
                 <div class="col-md-4">
                     <div class="main-card mb-3 card">
                         <div class="card-body"><h5 class="card-title">Cadastrar link de notificação</h5>
-                            <form class="">
+                            <form class="" action="curl/actions/addNotificacao.php" method="POST">
                                 <div class="form-row">
                                     <div class="col-md-12">
                                         <div class="position-relative form-group">
@@ -53,13 +60,20 @@
                                 <div class="form-row">
                                     <div class="col-md-12">
                                         <label class="" for="">Canal de Distribuição</label>
-                                        <select class="mb-2 form-control">
-                                            <option value="1">Geral</option>
+                                        <select class="mb-2 form-control" name="categoria_notificacao">
+                                            <?php
+                                                foreach ($categories->categories as  $category) {
+                                                   echo '<option value="'.$category->category_id.'">'.$category->name.'</option>';
+                                                }
+
+                                            ?>
+
+                                            <!--option value="1">Geral</option>
                                             <option value="2">Restaurantes</option>
                                             <option value="3">Pizzarias</option>
                                             <option value="4">Hamburguerias</option>
                                             <option value="5">Supermercados</option>
-                                            <option value="6">Lojas e Varejo em Geral</option>
+                                            <option value="6">Lojas e Varejo em Geral</option-->
                                         </select>
                                     </div>
                                 </div>
@@ -85,19 +99,23 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td class="text-center text-muted">1</td>
+                                 <?php 
+                                 foreach ($notifications->notifications as $notification) {
+                                       
+                                   
+                                echo '<tr>';
+                                echo '<td class="text-center text-muted">'.$notification->notification_id.'</td>';
 
-                                    <td class="text-center"><i class="pe-7s-link btn-icon-wrapper"> </i> <a href="#" target="_blank">Recado importante para donos de restaurantes</a></td>
-                                    <td class="text-center">
-                                        <div class="badge badge-success">Restaurantes</div>
-                                    </td>
-                                    <td class="text-center">
-                                        <button class="btn btn-outline-primary" data-toggle="modal" data-target="#modalEditarNotificacao"><i class="pe-7s-note btn-icon-wrapper"> </i> Editar</button>
-                                        <button class="btn btn-outline-danger" data-toggle="modal" data-target="#modalDeletarNotificacao"><i class="pe-7s-trash btn-icon-wrapper"> </i> Deletar</button>
-                                    </td>
-                                </tr>
-                                <tr>
+                                echo '<td class="text-center"><i class="pe-7s-link btn-icon-wrapper"> </i> <a href="#" target="_blank">'.$notification->notification.'</a></td>
+                                    <td class="text-center">';
+                                 echo  '<div class="badge badge-success">'.$categories->categories[$notification->category_id-1]->name.'</div></td>';
+                                echo    '<td class="text-center">';
+                                echo  '<button class="btn btn-outline-primary" data-toggle="modal" data-target="#modalEditarNotificacao"><i class="pe-7s-note btn-icon-wrapper"> </i> Editar</button>';
+                                 echo  '<button class="btn btn-outline-danger" data-toggle="modal" data-target="#modalDeletarNotificacao"><i class="pe-7s-trash btn-icon-wrapper"> </i> Deletar</button></td></tr>';
+                                
+                                 } 
+                                ?>
+                                <!--tr>
                                     <td class="text-center text-muted">2</td>
                                     <td class="text-center"><i class="pe-7s-link btn-icon-wrapper"> </i> <a href="#" target="_blank">Faça um upgrade no seu plano. E tenha mais recursos.</a></td>
                                     <td class="text-center">
@@ -131,7 +149,7 @@
                                         <button class="btn btn-outline-primary" data-toggle="modal" data-target="#modalEditarNotificacao"><i class="pe-7s-note btn-icon-wrapper"> </i> Editar</button>
                                         <button class="btn btn-outline-danger" data-toggle="modal" data-target="#modalDeletarNotificacao"><i class="pe-7s-trash btn-icon-wrapper"> </i> Deletar</button>
                                     </td>
-                                </tr>
+                                </tr-->
                                 </tbody>
                             </table>
                         </div>

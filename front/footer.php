@@ -38,7 +38,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary"><i class="pe-7s-refresh-2"> </i> Atualizar</button>
+                <button type="submit" onclick="location.href='gestor-notificacoes.php'" class="btn btn-primary"><i class="pe-7s-refresh-2"> </i> Atualizar</button>
             </div>
         </div>
     </div>

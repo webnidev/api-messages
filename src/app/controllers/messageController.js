@@ -20,41 +20,14 @@ module.exports = {
        })
     },
     
-    
+    showMessage(){
+
+    },
     editMessage(){
         return res.send("nova mensagem")
     },
     
     deleteMessage(){
         return res.send("nova mensagem")
-    },
-    
-    enotifications(){
-        return res.send("nova mensagem")
-    },
-    
-    addNotification(){
-        return res.send("nova mensagem")
-    },
-    editNotification(){
-        return res.send("nova mensagem")
-    },
-    deleteNotification(){
-        return res.send("nova mensagem")
-    },
-    
-    categories(){
-        return res.send("nova mensagem")
-    },
-    
-    addCategory(){
-        return res.send("nova mensagem")
-    },
-    
-    editCategory(){
-        return res.send("nova mensagem")
-    },
-    deleteCategory(){
-        return res.send("nova mensagem")
-    }
+    }  
 }
