@@ -5,7 +5,7 @@ module.exports = {
         Message.all(function(messages){
             return res.send({"messages":messages})
         })
-        //return res.redirect("https://infsolution.com.br")
+
     },
     
     addMessage(req, res){
