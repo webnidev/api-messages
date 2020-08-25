@@ -26,5 +26,21 @@ module.exports = {
 		Category.show(id, res, function(category){
 			return res.send(category)
 		})
+	},
+
+	editCategory(req, res){
+		const {id} = req.params
+		const data = req.body.name
+		Category.edit(id, data, res, function(category){
+			return res.send(category)
+		})
+	},
+
+	deleteCategory(req, res){
+		const {id} = req.params
+		Category.delete(id,res, function(category){
+			return res.send(category)
+		})
 	}
+
 }

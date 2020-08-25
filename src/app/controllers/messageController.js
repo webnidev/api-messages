@@ -20,14 +20,24 @@ module.exports = {
        })
     },
     
-    showMessage(){
-
+    showMessage(req, res){
+        const {id} = req.params
+        Message.show(id, res, function(message){
+            return res.send(message)
+        })
     },
-    editMessage(){
-        return res.send("nova mensagem")
+    editMessage(req, res){
+        const {id} = req.params
+        const data = req.body
+        Message.update(id, data, res, function(message){
+            return res.send(message)
+        })
     },
     
-    deleteMessage(){
-        return res.send("nova mensagem")
+    deleteMessage(req, res){
+        const {id} = req.params
+        Message.delete(id, res, function(message){
+            return res.send(message)
+        })
     }  
 }

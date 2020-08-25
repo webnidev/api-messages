@@ -23,12 +23,35 @@ module.exports={
 
 	
 
-	show(req, res){
-		const query = `SELECT * FROM categories WHERE category_id=${id}`
-        db.query(query, function(err, results){
+	show(id, res, callback){
+		const query = `SELECT * FROM categories WHERE category_id = $1`
+		const values = [id]
+        db.query(query, values,function(err, results){
             if (err) return res.send(err)
-            callback(results.rows)
+            callback(results.rows[0])
         })
 
+	},
+
+	edit(id, data, res, callback){
+		const query = `UPDATE categories SET name = $1 WHERE category_id = $2 RETURNING *`
+		const values = [data, id]
+		db.query(query, values, function(err, results){
+			console.log(err)
+			if (err) return res.send(err)
+			callback(results.rows[0])
+		})
+
+	},
+
+	delete(id, res, callback){
+		const query = `DELETE FROM categories WHERE category_id = $1 RETURNING *`
+		const values = [id]
+		db.query(query, values, function(err, results){
+			console.log(err)
+			if(err) return res.send(err)
+			callback(results.rows[0])
+		})
 	}
 }
+

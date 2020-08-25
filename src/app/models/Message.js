@@ -10,15 +10,16 @@ module.exports = {
     },
     show(id, res, callback){
 
-        const query = `SELECT * FROM messages WHERE message_id=${id}`
-        db.query(query, function(err, results){
+        const query = `SELECT * FROM messages WHERE message_id = $1`
+        const values = [id]
+        db.query(query, values,  function(err, results){
+            console.log(err)
             if (err) return res.send(err)
-            callback(results.rows)
+            callback(results.rows[0])
         })
 
     },
     create(data,res, callback){
-        console.log(data)
         const query = `INSERT INTO messages (message, url, created_at) VALUES($1, $2, $3) RETURNING message_id`
         
         const values = [data.message, data.url, date.date()]
@@ -29,11 +30,25 @@ module.exports = {
         })
 
     },
-    update(){
+    update(id, data, res, callback){
+        const query = `UPDATE messages SET message = $1, url = $2 WHERE message_id = $3 RETURNING *`
+        const values = [data.message, data.url, id]
+        db.query(query, values, function(err, results){
+            console.log(err)
+            if (err) return res.send(err)
+            callback(results.rows[0])
+        })
+
 
     },
-    delete(){
-
+    delete(id, res, callback){
+        const query = `DELETE FROM messages WHERE message_id = $1 RETURNING *`
+        const values = [id]
+        db.query(query, values, function(err, results){
+            console.log(err)
+            if(err) return res.send(err)
+            callback(results.rows[0])
+        })
     }
 
 

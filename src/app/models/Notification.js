@@ -9,8 +9,14 @@ module.exports = {
             callback(results.rows)
        })
     },
-    show(){
-
+    show(id, res, callback){
+        const query = `SELECT * FROM notication WHERE notification_id = $1`
+        const values = [id]
+        db.query(query, values,  function(err, results){
+            console.log(err)
+            if (err) return res.send(err)
+            callback(results.rows[0])
+        })
     },
     create(data,res, callback){
         console.log(data)
@@ -22,10 +28,22 @@ module.exports = {
             callback(results.rows[0])
         })
     },
-    update(){
-
+    update(id, data, res, callback){
+        const query = `UPDATE notifications SET notification = $1, url = $2, category_id = $3 WHERE notification_id = $4 RETURNING *`
+        const values = [data.notification, data.url, data.category_id, id]
+        db.query(query, values, function(err, results){
+            console.log(err)
+            if (err) return res.send(err)
+            callback(results.rows[0])
+        })
     },
-    delete(){
-
+    delete(id, res, callback){
+        const query = `DELETE FROM notifications WHERE notification_id = $1 RETURNING *`
+        const values = [id]
+        db.query(query, values, function(err, results){
+            console.log(err)
+            if(err) return res.send(err)
+            callback(results.rows[0])
+        })
     }
 }

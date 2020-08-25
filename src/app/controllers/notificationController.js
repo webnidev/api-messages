@@ -16,13 +16,23 @@ module.exports = {
            return res.send(notification)
        })
     },
-    showNotification(){
-
+    showNotification(req, res){
+        const {id} = req.params
+        Notification.show(id, res, function(notification){
+            return res.send(notification)
+        })
     },
-    editeNotification(){
-
+    editeNotification(req, res){
+         const {id} = req.params
+        const data = req.body
+        Notification.update(id, data, res, function(notification){
+            return res.send(notification)
+        })
     },
-    delNotification(){
-
+    deleteNotification(req, res){
+        const {id} = req.params
+        Notification.delete(id, res, function(notification){
+            return res.send(notification)
+        })
     }
 }
