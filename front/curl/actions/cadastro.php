@@ -7,5 +7,4 @@ $re->setopt(CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 $re->setopt(CURLOPT_POSTFIELDS, json_encode(array("message"=>$message, "url"=>$url)));
 
 var_dump($re->exec());
-header('Location: http://localhost/front/index.php'); 
-
+header('Location: /index.php');
