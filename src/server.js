@@ -8,5 +8,5 @@ const server = express()
 server.use(express.json());
 server.use(routes)
 server.listen(5000, function(){
-    console.log('server is runing')
+    console.log('server is running')
 })
