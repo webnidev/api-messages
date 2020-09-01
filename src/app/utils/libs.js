@@ -20,7 +20,7 @@ module.exports={
     },
     createCode(){
         let code = ""
-        for(let i = 0; i<=6; i++){
+        for(let i = 0; i<=5; i++){
             code += String.fromCharCode(this.getChar(this.roundRange()))
         }
         return code
