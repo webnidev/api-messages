@@ -40,6 +40,7 @@ build/Release
 # Pasta que o MacOS cria automaticamente
 __MACOSX
 
+
 # Dependency directories
 node_modules/
 jspm_packages/
