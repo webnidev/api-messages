@@ -2,6 +2,7 @@ const express = require('express')
 const messageController = require('./app/controllers/messageController')
 const categoryController = require('./app/controllers/categoryController')
 const notificationController = require('./app/controllers/notificationController')
+const reportController = require('./app/controllers/reportController')
 const routes = express.Router()
 
 routes.get('/', function(req, res){
@@ -49,4 +50,6 @@ routes.post('/notification', notificationController.addNotification)
 routes.get('/notification/:id', notificationController.showNotification)
 routes.put('/notification/:id', notificationController.editeNotification)
 routes.delete('/notification/:id', notificationController.deleteNotification)
+
+routes.get('/redirect/:slug',reportController.redirect)
 module.exports = routes

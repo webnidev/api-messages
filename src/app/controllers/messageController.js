@@ -1,10 +1,14 @@
 const Message = require('../models/Message')
+const libs = require('../utils/libs')
+
+
 module.exports = {
     messages(req, res){
         
-        Message.all(function(messages){
+        Message.all(res, function(messages){
             return res.send({"messages":messages})
         })
+        
 
     },
     
