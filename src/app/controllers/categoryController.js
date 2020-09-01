@@ -2,7 +2,7 @@ const Category = require('../models/Category')
 
 module.exports = {
 	categories(req, res){
-		Category.all(function(categories){
+		Category.all(res, function(categories){
 			return res.send({"categories":categories})
 		})
 	},
