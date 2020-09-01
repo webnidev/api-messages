@@ -52,4 +52,5 @@ routes.put('/notification/:id', notificationController.editeNotification)
 routes.delete('/notification/:id', notificationController.deleteNotification)
 
 routes.get('/redirect/:slug',reportController.redirect)
+routes.get('/report', reportController.report)
 module.exports = routes
