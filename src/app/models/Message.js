@@ -1,16 +1,17 @@
 const db = require('../../config/database') 
+const serializer = require('../serializers/messageSerializer')
 const date = require('../utils/dates')
 const libs = require('../utils/libs')
 const report = require('./Report')
 module.exports = {
-    all(res, callback){
-        const query = `SELECT * FROM messages`
+    all(req, res, callback){
+        const query = `SELECT * FROM messages ORDER BY message_id DESC`
        db.query(query, function(err, results){
             if (err){
                 console.log(err)
                 return res.send("Houve um erro com sua busca")
             } 
-            callback(results.rows)
+            callback(serializer.messagesSerializer(req, results.rows))
        })
     },
     show(id, res, callback){
@@ -30,7 +31,7 @@ module.exports = {
     create(data,res, callback){
         const query = `INSERT INTO messages (message, url, url_redirect, created_at) VALUES($1, $2, $3, $4) RETURNING message, url_redirect`
         
-        const values = [data.message, libs.createCode(), data.url, date.date()]
+        const values = [data.message, data.code, data.url, date.date()]
         db.query(query, values, function(err, results){
             
             if (err){

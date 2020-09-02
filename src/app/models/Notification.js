@@ -1,15 +1,16 @@
 const db = require('../../config/database') 
+const notificationSerializer = require('../serializers/notificationSerializer')
 const date = require('../utils/dates')
 const libs = require('../utils/libs')
 module.exports = {
-    all(callback){
-        const query = `SELECT * FROM notifications`
+    all(req, res, callback){
+        const query = `SELECT * FROM notifications  ORDER BY notification_id DESC`
        db.query(query, function(err, results){
         if (err){
             console.log(err)
             return res.send("Houve um erro com sua busca")
         } 
-            callback(results.rows)
+            callback(notificationSerializer.notificationsSerializer(req,results.rows))
        })
     },
     show(id, res, callback){

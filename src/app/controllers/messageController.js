@@ -5,12 +5,12 @@ const libs = require('../utils/libs')
 
 module.exports = {
     messages(req, res){
-        
-        Message.all(res, function(messages){
+        Message.all(req, res, function(messages){
             return res.send({"messages":messages})
         })
         
-
+       
+        
     },
     
     addMessage(req, res){
@@ -20,9 +20,20 @@ module.exports = {
                return res.send("Preencha os campos")
              }
         }
-       Message.create(req.body, res, function(message){
-           return res.send(message)
-       })
+        let code = libs.createCode()
+        libs.recursao(res, code,"notification", function(value){
+            if(value){
+                return res.send("Codigo duplicado, Tente novamente")
+            }else{
+                req.body.code = code
+                Message.create(req.body, res, function(message){
+                    return res.send(message)
+                })
+            }
+            
+        })
+
+       
     },
     
     showMessage(req, res){
