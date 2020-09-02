@@ -16,19 +16,19 @@ module.exports={
         })
 
     },
-    show(slug, res, callback){
-        const query = `SELECT url_redirect FROM messages WHERE url = $1`
+    show(table, slug, res, callback){
+        const query = `SELECT url_redirect FROM ${table} WHERE url = $1`
         db.query(query, [slug],  function(err, results){           
             if (err) {
                 console.log(err)
                 return res.send(err)
             }
             
-            callback(results.rows[0])
+            callback(results.rows[0].url_redirect)
         })
     },
     all(res, callback){
-        const query = `SELECT * FROM reports`
+        const query = `SELECT * FROM reports ORDER BY report_id DESC`
        db.query(query, function(err, results){
             if (err){
                 console.log(err)

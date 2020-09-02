@@ -1,22 +1,12 @@
 const db = require('../../config/database') 
 
 module.exports={
-    recursao(res, callback){
-        const query = `SELECT message_id FROM messages WHERE url = $1`
-        //const values = [this.createCode()]
-        const values = ["sd4RoX"]
-        db.query(query, values, function(err, results){
-            if (err){
-                console.log(err)
-                return res.send(err)
-            }
-            if(results.rows[0]){
-                return this.recursao(res, callback)
-            }
-            return callback(results.rows[0])
+    recursao(res, values, table, callback){
+        const query = `SELECT ${table}_id FROM ${table}s WHERE url = $1`   
+        db.query(query, [values], function(err, results){
+            if(err) return res.send(err)
+            callback(results.rows[0])
         })
-
-        
     },
     createCode(){
         let code = ""
