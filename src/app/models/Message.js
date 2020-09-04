@@ -43,7 +43,7 @@ module.exports = {
 
     },
     update(id, data, res, callback){
-        const query = `UPDATE messages SET message = $1, url = $2 WHERE message_id = $3 RETURNING *`
+        const query = `UPDATE messages SET message = $1, url_redirect = $2 WHERE message_id = $3 RETURNING *`
         const values = [data.message, data.url, id]
         db.query(query, values, function(err, results){
             if (err){

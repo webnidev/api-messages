@@ -37,7 +37,7 @@ module.exports = {
         })
     },
     update(id, data, res, callback){
-        const query = `UPDATE notifications SET notification = $1, url = $2, category_id = $3 WHERE notification_id = $4 RETURNING *`
+        const query = `UPDATE notifications SET notification = $1, url_redirect = $2, category_id = $3 WHERE notification_id = $4 RETURNING *`
         const values = [data.notification, data.url, data.category_id, id]
         db.query(query, values, function(err, results){
             if (err) {
