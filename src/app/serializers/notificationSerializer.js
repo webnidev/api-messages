@@ -14,7 +14,6 @@ module.exports = {
                 "notification": notifications[i].notification,
                 "url":  req.protocol+"://"+req.get('host')+"/redirect/notifications/"+notifications[i].url}
             notificationsSerializer.push(notification)
-            //notifications[i].url = "https://localhost:5000/redirect/"+notifications[i].url
         }
         return notificationsSerializer
     }
