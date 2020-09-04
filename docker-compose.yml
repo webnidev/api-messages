@@ -13,11 +13,11 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8068:8080
+  # #adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - 8068:8080
 
 volumes:
   pg-data:
